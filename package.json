@@ -2,14 +2,25 @@
   "name": "go-tofriend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon server.js",
+    "devStart": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "ejs": "^3.1.8",
     "express": "^4.18.2",
-    "save": "^2.9.0"
+    "nodemon": "^2.0.20",
+    "save": "^2.9.0",
+    "socket.io": "^4.6.0",
+    "socket.io-client": "^4.6.0",
+    "start": "^5.1.0",
+    "ws": "^8.12.0"
+  },
+  "optionalDependencies": {
+    "bufferutil": "^4.0.7",
+    "utf-8-validate": "^5.0.10"
   }
 }

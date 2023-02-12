@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+    <link rel="stylesheet" type="text/css" href="/CSS/index.css" />
+    <title>go-friend</title>
+</head>
+
+<body>
+    <nav>
+        <div class="top">
+            <div class="top-left" id="goicon"><b>go-tofriend</b></div>
+            <div class="top-right">
+                <div class="login-out" id="login-signin">登入/註冊</div>
+                <div class="login-out hide" id="logout">登出系統</div>
+            </div>
+        </div>
+        <div class="top-line"></div>
+    </nav>
+    <div class="mainData">
+        <div class="project">go-tofriend</div>
+        <div class="loginOrRegister">
+            <div id="login" class="login transition ">
+                <div class="verify ">
+                    <div class="top-bar"></div>
+                    <div class="verify_title">登入會員帳號</div>
+                    <input type="text" name="email" id="login_email" class="login_email  verify_input"
+                        placeholder="輸入電子信箱" />
+                    <br />
+                    <input type="password" name="password" id="login_password" class="login_password verify_input"
+                        placeholder="輸入密碼" />
+                    <br />
+                    <div type="button" class="verify_btn verify_input" id="login_button">登入帳戶</div>
+                    <div id="login_msg" class="see_msg"></div>
+                    <div class="change_text">
+                    <span class="verify_text ">還沒有帳戶？</span><span class="verify_text login_change changebtn">點此註冊</span>
+                    </div>
+                </div>
+            </div>
+            <div id="register" class="register transition hide">
+                <div class="verify">
+                    <div class="top-bar"></div>
+                    <div class="verify_title">註冊會員帳號</div>
+                    <input type="text" name="name" id="register_name" class="register_name  verify_input"
+                        placeholder="輸入姓名" />
+                    <br />
+                    <input type="text" name="email" id="register_email" class="register_email verify_input"
+                        placeholder="輸入電子信箱" />
+                    <br />
+                    <input type="password" name="password" id="register_password" class="register_password verify_input"
+                        placeholder="輸入密碼" />
+                    <br />
+                    <div type="button" class="verify_btn verify_input" id="register_button">註冊新帳戶</div>
+                    <div id="register_msg"  class="see_msg"></div>
+                    <div class="change_text">
+                    <span class="verify_text ">已經有帳戶了？</span><span class="verify_text register_change changebtn">點此登入</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer" id="footer">
+        <div class="footer_text">COPYRIGHT © 2023 go-tofriend.com</div>
+    </div>
+    <script  rel="stylesheet" type="text/javascript" src="/JS/index.js"></script>   
+</body>
+</html>
