@@ -4,45 +4,14 @@ body {
     position: relative;  
     background-color: antiquewhite; 
 }
-/* nav bar */
-nav {
-    position: sticky; 
-    top: 0px;
-    height:54px;
-    background-color: #a56f0a;
-    z-index: 99;
-}
-.top{
-    display: flex; 
-    width:1200px;
-    margin:auto;
-    justify-content: space-between;
-}
-.top-left{
-    width:150px;
-    height:34px;
-    flex: auto;
-    margin: 10px 0px 10px 10px;
-    font-size: 30px;
-    line-height: 34px;
-    color:#fdfdfd;
-    cursor: pointer; 
-   
-}
-.top-right{
-    margin: 10px ;
-    display: flex;
-    align-items: center;
-    color: #fdfdfd;
-    font-size: 28px;
-    line-height: 30px;
-}
+
 
 
 .mainData{
     display: flex;
+    position: relative;
     width:1200px;
-    height: 800px;
+    min-height: 100vh;
     justify-content: space-between;
     margin: auto;;
 }
@@ -56,15 +25,16 @@ nav {
 
 /* 驗證資訊 */
 .loginOrRegister{
-    width:600px;
+    width:450px;
     margin: auto ;
 }
 .verify{
-    background: #FFFFFF;
+    /* background: #FFFFFF; */
     box-shadow: 0px 4px 60px #d5d3d1;
-    border-radius: 50px;
+    border-radius: 30px;
     color: #a56f0a;
     text-align: center;
+    padding-bottom: 10px;
 } 
 .login .register{
     height: 800px;
@@ -72,52 +42,52 @@ nav {
 
 .top-bar{
     /* position: absolute; */
-    height: 100px;
+    height: 80px;
     background-color:#af6a09 ;
-    border-top-left-radius: 50px;border-top-right-radius: 50px;
+    border-top-left-radius: 30px;border-top-right-radius: 30px;
 }
 .verify_title{
     margin:15px;
-    padding:20px;
+    padding:10px;
     font-weight: 700;
-    font-size: 42px;
+    font-size: 36px;
     line-height: 32px;
     text-align: center;
 }
 .verify_input{
-
-    width: 520px;
-    height: 54px;
-    padding:20px;
-    margin:15px 15px;
+    width: 380px;
+    height: 36px;
+    padding:10px;
+    margin:10px;
     background: #FFFFFF;
     border: 1px solid #CCCCCC;
-    border-radius: 30px;
+    border-radius: 20px;
     font-weight: 500;
     font-size: 24px;
     line-height: 24px;
 }
 .verify_btn{
     display: flex;
+    outline: none;
+    border: none;
     color:#FFFFFF;
     background: #af6a09;
-    border-radius: 30px;
     justify-content:center;
     align-items: center;
     cursor: pointer; 
     font-weight: 400;
-    font-size: 32px;
+    font-size: 28px;
     line-height: 24px;
+    margin: 10px auto;
 }
 .change_text{
-    padding: 10px;
     margin: 0px 15px;
 }
 .verify_text{
     margin:15px;
-    padding:20px;
+    padding:10px;
     font-weight: 500;
-    font-size: 32px;
+    font-size: 24px;
     line-height: 32px;
     text-align: center;
 }
@@ -136,16 +106,17 @@ nav {
 }
 .see_msg {
     padding: 0px 10px;
-    margin: 0px 15px;
+    margin: 10px 15px;
     font-size: 24px;
     text-align: center;
 }
 
 /* 底部資訊 */
 .footer{
+    display: flex;
+    position: absolute;
     width:100%;
     height: 104px;
-    display: flex;
     justify-content: center;
     align-items: center;
     color: #FFFFFF;

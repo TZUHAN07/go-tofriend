@@ -1,29 +1,114 @@
-const socket = io('http://localhost:3000');
-const canvas = document.getElementById('goboard');
+// import {createBroad} from './gocanvas';
+// import {ninePoints} from './gocanvas';
 
-//棋盤
-window.onload = function() {
-    // canvas.width = 1140;
-    // canvas.height = 1140;
-    const ctx = canvas.getContext('2d');
-    ctx.strokeStyle = ' black';
-    
-    for (let i = 0; i < 19; i++) {
-        ctx.beginPath();
-        // 橫線
-        ctx.moveTo(45 + (i * 45), 45);
-        ctx.lineTo(45 + (i * 45), 855);
-        ctx.stroke();
-        // 直線
-        ctx.moveTo(45, 45 + (i * 45));
-        ctx.lineTo(855, 45 + (i * 45));
-        ctx.stroke();
-      }   
+
+let go = new Array(
+	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+);
+let shadow = new Array(
+	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+);
+
+var move_record = new Array();
+
+function showGo() {
+	const canvas = document.getElementById('goboard');
+	const ctx = canvas.getContext("2d");
+	ctx.strokeStyle="black";
+	
+	
+	ctx.fillStyle = "sandybrown";
+	ctx.fillRect(0,0,900,900);
+	
+
+	createBroad(ctx);
+	ninePoints(ctx);
+
+	for (let i = 0; i < 19; i++) {
+		for (let j = 0; j < 19; j++) {
+			if (go[i][j] === 1) { //black
+				var rg = cxt.createRadialGradient((i+1)*45-3, (j+1)*45-3, 1, (i+1)*45-4, (j+1)*45-4, 11);
+				rg.addColorStop(1, /*"black"*/"#202020");
+				rg.addColorStop(0, "gray");
+				ctx.beginPath();
+				ctx.arc((i+1)*30, (j+1)*30,15,0,2*Math.PI,false);
+				//cxt.fillStyle="black";
+				ctx.fillStyle=rg;
+				ctx.fill();
+				
+			}
+			else if (go[i][j] === 2) { //white
+				var rg = cxt.createRadialGradient((i+1)*45-3, (j+1)*45-3, 1, (i+1)*45-4, (j+1)*45-4, 11);
+				rg.addColorStop(1, /*"lightgray"*/"#e0e0e0");
+				rg.addColorStop(0, "white");
+				ctx.beginPath();
+				ctx.arc((i+1)*30, (j+1)*30,15,0,2*Math.PI,false);
+				//cxt.fillStyle="white";
+				ctx.fillStyle=rg;
+				ctx.fill();
+			}
+			else if (go[i][j] === 7) { // fill color
+				ctx.beginPath();
+				ctx.arc((i+1)*30, (j+1)*30,15,0,2*Math.PI,false);
+				ctx.fillStyle="red";
+				ctx.fill();
+			}
+		}
+	}
 }
 
+// function play(row, col) {
+// 	if (row < 0 || row > 19 || col < 0 || col > 19) {
+// 		alert("index error....");
+// 		return;
+// 	}
+// 	// 已有棋子在此
+// 	if (go[row][col] != 0) {
+// 		alert("已有棋子！");
+// 		return;
+// 	}
 
-//開始下棋
+// 	const canDown = false; // 是否可落子
+// 	// 得到将落子的棋子的颜色
+// 	let color = 2; // 白
+// 	if (move_count % 2 === 0) { // 未落子前是白
+// 		color = 1; 
+// 	}
 
-socket.on('connect',() => {
-  console.log(socket.id)
-})
+// }
