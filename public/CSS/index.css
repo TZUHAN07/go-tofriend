@@ -22,6 +22,13 @@ body {
     color:#855a09
 }
 
+.description{
+    margin: auto ;
+    font-weight: 700;
+    font-size: 28px;
+    color:#e0ba72
+}
+
 
 /* 驗證資訊 */
 .loginOrRegister{
