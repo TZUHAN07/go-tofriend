@@ -1,5 +1,4 @@
-// import {createBroad} from './gocanvas';
-// import {ninePoints} from './gocanvas';
+
 
 
 let go = new Array(
@@ -57,8 +56,8 @@ function showGo() {
 	ctx.fillRect(0,0,900,900);
 	
 
-	createBroad(ctx);
-	ninePoints(ctx);
+	gocanvas.createBroad(ctx);
+	gocanvas.ninePoints(ctx);
 
 	for (let i = 0; i < 19; i++) {
 		for (let j = 0; j < 19; j++) {
@@ -93,22 +92,23 @@ function showGo() {
 	}
 }
 
-// function play(row, col) {
-// 	if (row < 0 || row > 19 || col < 0 || col > 19) {
-// 		alert("index error....");
-// 		return;
-// 	}
-// 	// 已有棋子在此
-// 	if (go[row][col] != 0) {
-// 		alert("已有棋子！");
-// 		return;
-// 	}
+function play(row, col) {
+	if (row < 0 || row > 19 || col < 0 || col > 19) {
+		alert("index error....");
+		return;
+	}
+	// 已有棋子在此
+	if (go[row][col] != 0) {
+		alert("已有棋子！");
+		return;
+	}
 
-// 	const canDown = false; // 是否可落子
-// 	// 得到将落子的棋子的颜色
-// 	let color = 2; // 白
-// 	if (move_count % 2 === 0) { // 未落子前是白
-// 		color = 1; 
-// 	}
+	// const canDown = false; // 是否可落子
+	// // 得到将落子的棋子的颜色
+	// let color = 2; // 白
+	// if (move_count % 2 === 0) { // 未落子前是白
+	// 	color = 1; 
+	// }
 
-// }
+}
+module.exports  = { showGo,play }

@@ -37,7 +37,22 @@ nav {
     font-size: 24px;
     line-height: 20px;
 }
-
+.moveShow{
+    display:flex;
+    width:1200px;
+    margin:auto;
+}
+.button{
+   border:none;
+   margin:30px 30px 0px 30px;
+   padding:10px;
+   color:#c9a682;
+   background: #dcdbda;
+   border-radius: 5px;
+   font-weight: 700;
+   font-size: 16px;
+   line-height: 13px;
+}
 .maindata{
     position: relative;
     display:flex;
@@ -48,16 +63,16 @@ nav {
     margin:auto;
 
 }
-.weiqi {
-    /* margin:30px; */
-	border: 0px solid blue;
-	position: absolute;
-}
-.goboard{
+.weiqi{
+    position: absolute;
     margin:30px;
     padding:10px;
     width:70%;
-    background-color:rgb(201, 166, 130);
+    background-color:#c9a682;
+}
+.goboard{
+    position: absolute;
+    z-index: 200;
 }
 
 .allData{
