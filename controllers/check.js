@@ -5,7 +5,5 @@ module.exports = class CheckCustomer {
         const result = re.test(email);
         return result;
     }
-    
-
 }
 

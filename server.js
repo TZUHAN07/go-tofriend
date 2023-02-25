@@ -1,6 +1,6 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const cookieParser = require("cookie-parser");
+const bodyParser = require('body-parser');
 const app=express();
 const member = require('./routes/member');
 // const users = require('./routes/users');
@@ -11,11 +11,11 @@ const io = require('socket.io')(http)
 const port = process.env.PORT || 3000;
 
 app.use(express.static('public'));
-app.use('/', member);
 // app.use('/users', users);
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(bodyParser.json());
+app.use('/', member);
 app.set('view engine', 'ejs');
 
 // 首頁

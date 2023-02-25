@@ -1,4 +1,3 @@
-// const toRegister = require('../models/register');
 const db = require('../models/db');
 const membercheck = require('./check');
 const bcrypt = require('bcrypt');
@@ -80,8 +79,8 @@ module.exports = class Member {
             if (beHashPassword) {
                 // 產生token
                 const token = jwt.sign({
-                    algorithm: 'HS256',
-                    data: {
+                    // algorithm: 'HS256',
+                    payload: {
                         id:rows[0].id ,
                         name:rows[0].name ,
                         email:rows[0].email
@@ -118,7 +117,6 @@ module.exports = class Member {
     async getLogin(req, res) {
         try{
             const cookies = req.cookies.access_token;
-            console.log(req.cookies,122);
             if (!cookies) {
                 return res.status(400).json({ data: null });
             }else{
