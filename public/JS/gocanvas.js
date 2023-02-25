@@ -1,7 +1,4 @@
 const socket = io.connect();
-// const weiqi = document.getElementById('weiqi');
-// const ctx = weiqi.getContext('2d');
-
 const moveShowButton = document.getElementById('moveShow');
 
 //落子順序輔助
@@ -18,7 +15,6 @@ function clickButton() {
 		showGo();
 	}
 }
-
 
 //畫棋盤  
 function createBoard(ctx){
@@ -47,7 +43,7 @@ function ninePoints(ctx) {
 	for (let i = 0; i < points.length; i++) {
 		//circle
 		ctx.beginPath();
-		ctx.arc(points[i][0],points[i][1],3,0,2*Math.PI,false);
+		ctx.arc(points[i][0],points[i][1],4.5,0,2*Math.PI,false);
 		ctx.fillStyle='black';
 		ctx.fill();
 	}
@@ -65,9 +61,9 @@ function mousedownHandler(e) {
 	}
    
 	//判斷鼠標點擊的位置是否在一個特定區域內
-	if (x < 45-10 || x > 900-45+10)
+	if (x < 45-20 || x > 900-45+20)
 		return;
-	if (y < 45-10 || y > 900-45+10)
+	if (y < 45-20 || y > 900-45+20)
 		return;
 	
   	//將鼠標點擊的坐標轉換為可以在棋盤上使用的座標
@@ -76,15 +72,15 @@ function mousedownHandler(e) {
   	let xStatus;
   	let yStatus;
 	for (let i = 1; i <= 19; i++) {
-		if (x > i*45-22 && x < i*45+22) {
+		if (x > i*45-22.5 && x < i*45+22.5) {
 			x = i*45;
 			xIsFree = true;
-      		xStatus = i-1 ;
+      		xStatus = i -1;
 		}
-		if (y > i*45-22 && y < i*45+22) {
-			y = i*30;
+		if (y > i*45-22.5 && y < i*45+22.5) {
+			y = i*45;
 			yIsFree = true;
-      		yStatus = i-1 ;
+      		yStatus = i -1;
 		}
 	}
 	if (!xIsFree || !yIsFree)
@@ -138,7 +134,7 @@ function mousemoveHandler(e) {
 	ctx.fill();
 
 	ctx.beginPath();
-	ctx.arc(x,y,17.5,0,2*Math.PI,false);
+	ctx.arc(x,y,20,0,2*Math.PI,false);
 	if (moveCount % 2 == 0)
 		ctx.fillStyle='black';
 	else
@@ -750,7 +746,7 @@ function initBroad() {
 	ninePoints(ctx);
 
 	showGo();
-	console.log("show")
+	
 }
 
 //監聽
@@ -770,6 +766,6 @@ addLoadEvent(clickButton);
 
 socket.on('connect',() => {
   console.log(socket.id)
+
+
 })
-
-
