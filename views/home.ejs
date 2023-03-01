@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+    <link rel="stylesheet" type="text/css" href="/CSS/gocanvas.css" />
+    <title>go-tofriend 圍棋大廳</title>
+</head>
+
+<body>
+    <nav>
+        <div class="top">
+            <img src= "/images/logo.png" />
+            <div class="top-left" id="project"><b>go-tofriend</b></div>
+            <div class="top-right">
+                <div class="login-out " id="logout">離開大廳</div>
+            </div>
+        </div>
+        <div class="top-line"></div>
+    </nav>
+    <div class="gameRoom">
+        <div class="country"></div>
+        <div class="main">
+            <div class="room">
+                <div class="room"></div>
+                <div class="chat-content"></div>
+            </div>
+            <div class="chat"></div>
+        </div>
+        <div class="player">
+            <div class="online">線上-</div>
+        </div>
+    </div>
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script  rel="stylesheet" type="module" src="/JS/gocanvas.js"></script>   
+</body>
+</html>
