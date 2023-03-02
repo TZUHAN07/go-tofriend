@@ -17,6 +17,9 @@ body {
 }
 .project{
     margin: auto ;
+}
+.projectname{
+    /* margin: auto ; */
     font-weight: 700;
     font-size: 72px;
     color:#855a09
@@ -32,11 +35,10 @@ body {
 
 /* 驗證資訊 */
 .loginOrRegister{
-    width:450px;
+    width:480px;
     margin: auto ;
 }
 .verify{
-    /* background: #FFFFFF; */
     box-shadow: 0px 4px 60px #d5d3d1;
     border-radius: 30px;
     color: #a56f0a;
@@ -53,6 +55,19 @@ body {
     background-color:#af6a09 ;
     border-top-left-radius: 30px;border-top-right-radius: 30px;
 }
+
+.email .password .name{
+    display: flex;
+    position: relative;
+    width:460px;
+    margin:0px 10px;   
+}
+label {
+    display: inline-block; 
+    margin-left: 10px; 
+    font-weight: bold; 
+    font-size: 24px;
+    }
 .verify_title{
     margin:15px;
     padding:10px;
@@ -62,10 +77,10 @@ body {
     text-align: center;
 }
 .verify_input{
-    width: 380px;
+    width: 340px;
     height: 36px;
     padding:10px;
-    margin:10px;
+    margin:10px 10px 10px 0px;
     background: #FFFFFF;
     border: 1px solid #CCCCCC;
     border-radius: 20px;
@@ -77,6 +92,7 @@ body {
     display: flex;
     outline: none;
     border: none;
+    width: 420px;
     color:#FFFFFF;
     background: #af6a09;
     justify-content:center;
@@ -90,6 +106,7 @@ body {
 .change_text{
     margin: 0px 15px;
 }
+
 .verify_text{
     margin:15px;
     padding:10px;
@@ -107,10 +124,10 @@ body {
 .hide{
     display:none;
 }
-.show_block{
+/* .show_block{
     display: block;
     margin: auto;
-}
+} */
 .see_msg {
     padding: 0px 10px;
     margin: 10px 15px;
