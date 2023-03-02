@@ -1,0 +1,60 @@
+body {
+    margin: 0 auto;
+    padding: 0 auto;
+    position: relative;  
+    background-color: antiquewhite; 
+}
+/* nav bar */
+nav {
+    position: sticky; 
+    top: 0px;
+    height:54px;
+    background-color: #a56f0a;
+    z-index: 99;
+}
+.top{
+    display: flex; 
+    width:1200px;
+    margin:auto;
+    justify-content: space-between;
+}
+img{
+    width:30px;
+    height:30px;
+    margin: 10px 0px 10px 10px ;
+}
+.top-left{
+    width:150px;
+    height:30px;
+    flex: auto;
+    margin: 10px 0px 10px 10px;
+    font-size: 28px;
+    line-height: 28px;
+    color:#fdfdfd;
+    cursor: pointer; 
+   
+}
+.top-right{
+    margin: 10px ;
+    display: flex;
+    align-items: center;
+    color: #fdfdfd;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+/* 底部資訊 */
+.footer{
+    display: flex;
+    width:100%;
+    height: 104px;
+    justify-content: center;
+    align-items: center;
+    color: #FFFFFF;
+    background-color: #855a09;
+}
+.footer_text{
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 13px;
+}

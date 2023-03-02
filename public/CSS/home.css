@@ -1,0 +1,23 @@
+.gameRoom{
+    position: relative;
+    display:flex;
+    width:1200px;
+    min-height: 100vh;
+    flex-wrap: wrap;
+    height: auto;
+    /* justify-content: space-between; */
+    margin:auto;
+}
+.main{
+    width:78%;
+    height:auto;
+    background-color: aliceblue;
+    margin:50px 10px 30px 30px;
+    border-radius: 30px;
+}
+.player{
+    width:15%;
+    background-color: aliceblue;
+    margin:50px 30px 30px 10px;
+    border-radius: 30px;
+}

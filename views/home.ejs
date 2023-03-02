@@ -5,7 +5,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
-    <link rel="stylesheet" type="text/css" href="/CSS/gocanvas.css" />
+    <link rel="stylesheet" type="text/css" href="/CSS/example.css" />
+    <link rel="stylesheet" type="text/css" href="/CSS/home.css" />
     <title>go-tofriend 圍棋大廳</title>
 </head>
 
@@ -15,13 +16,14 @@
             <img src= "/images/logo.png" />
             <div class="top-left" id="project"><b>go-tofriend</b></div>
             <div class="top-right">
+                <div class="welcome " id="welcome">歡迎{{name}}</div>
                 <div class="login-out " id="logout">離開大廳</div>
             </div>
         </div>
         <div class="top-line"></div>
     </nav>
     <div class="gameRoom">
-        <div class="country"></div>
+        <!-- <div class="country"></div> -->
         <div class="main">
             <div class="room">
                 <div class="room"></div>
@@ -33,8 +35,11 @@
             <div class="online">線上-</div>
         </div>
     </div>
-    
+    <div class="footer" id="footer">
+        <div class="footer_text">COPYRIGHT © 2023 go-tofriend.com</div>
+    </div>
+
     <script src="/socket.io/socket.io.js"></script>
-    <script  rel="stylesheet" type="module" src="/JS/gocanvas.js"></script>   
+    <script  rel="stylesheet" type="module" src="/JS/home.js"></script>   
 </body>
 </html>
