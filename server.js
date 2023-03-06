@@ -37,6 +37,10 @@ app.get('/home',(req, res)=>{
 app.get('/gogame',(req, res)=>{
     res.render('gogame')
 });
+//棋室
+app.get('/goonly',(req, res)=>{
+    res.render('goonly')
+});
 
 const messagesNamespace = io.of('/messages');
 messagesNamespace.on('connection', (socket) => {
@@ -71,36 +75,43 @@ messagesNamespace.on('connection', (socket) => {
 
 
 const goNamespace = io.of('/go');
-const game = {
-    players: {}, // 玩家資訊
-    moveCount: 0 // 移動次數
-  };
+// 將所有房間存儲在一個對象中，每個房間有一個棋盤和兩個玩家
+const gorooms = {};
 goNamespace.on('connection', (socket) => {
     
         console.log(socket.id);
         console.log('New client connected');
-        // 新玩家加入遊戲
-        game.players[socket.id] = {
-            socketId: socket.id,
-            // color: Math.random() < 0.5 ? 1 : 2
-        };
         
-         // 計算在線人數
-         function getOnlinePlayers() {
-            return Object.keys(game.players).length;
-        }
-
-        // 當有兩個人時開始遊戲
-        if (getOnlinePlayers() === 2) {
-          const playerIds = Object.keys(game.players);
-          game.players[playerIds[0]].color = 1; // 先進來的玩家拿黑旗
-          game.players[playerIds[1]].color = 2; // 後進來的玩家拿白棋
-          goNamespace.emit('startGame', game.players); // 告知客戶端遊戲開始
-        }
-
-        // 通知所有玩家有新玩家加入
-        const onlinePlayers = getOnlinePlayers()
-        goNamespace.emit('updatePlayers', onlinePlayers);
+        socket.on('joinRoom', (roomId) => {
+            console.log(`user ${socket.id} joined room ${roomId}`);
+            if (!gorooms[roomId]) {
+                gorooms[roomId] = {
+                players: {},
+                currentTurn: 'black',
+                board: Array(19).fill().map(() => Array(19).fill(''))
+              };
+            }
+            const room = gorooms[roomId];
+            if (Object.keys(room.players).length < 2) {
+              const color = Object.keys(room.players).length === 0 ? 'black' : 'white';
+              room.players[socket.id] = color;
+              goNamespace.emit('joinedRoom', color);
+              socket.join(roomId);
+              io.to(roomId).emit('updateBoard', room.board, room.currentTurn);
+            } else {
+                goNamespace.emit('roomFull');
+            }
+          });
+        
+          socket.on('makeMove', (roomId, x, y) => {
+            console.log(`user ${socket.id} made move ${x},${y} in room ${roomId}`);
+            const room = gorooms[roomId];
+            if (room && room.players[socket.id] === room.currentTurn) {
+              room.board[x][y] = room.currentTurn;
+              room.currentTurn = room.currentTurn === 'black' ? 'white' : 'black';
+              io.to(roomId).emit('updateBoard', room.board, room.currentTurn);
+            }
+          });
 
         const boardData = board.createBoard();
         goNamespace.emit('board', boardData);
@@ -114,31 +125,31 @@ goNamespace.on('connection', (socket) => {
           const update = board.updateBoard(x, y, color);
         //   console.log(update,"updateBoard")
           // 增加移動次數
-          game.moveCount++;
+        //   game.moveCount++;
           // 更新棋盤狀態
           // const update = board.updateBoard(x, y, color);
           // console.log(update,74)
           // moveCount++;
-          console.log(`Player ${color} made a move at (${x}, ${y}), movecount: ${game.moveCount++}`);
+        //   console.log(`Player ${color} made a move at (${x}, ${y}), movecount: ${game.moveCount++}`);
 
-          // 告知客戶端換對方下棋
-          const nextPlayer = color === 1 ? 2 : 1;
-          const opponent = getOpponent(socket.id);
-          io.to(opponent).emit('next', nextPlayer, game.moveCount);
-          // socket.emit('next', nextPlayer, moveCount);
+          
         });
 
-        socket.on('requestBoard', () => {
-            // const boardBuffer = board.getBoardBuffer();// 回傳一個 buffer
-            const boardString = board.getBoardString();
-            // console.log(boardString,97)
-            io.emit('updateBoard', boardString); // 將 buffer 通知所有客戶端
-        })
-        function getOpponent(socketId) {
-            const playerIds = Object.keys(game.players);
-            const opponentId = playerIds.find(id => id !== socketId);
-            return opponentId;
-        }
+        socket.on('disconnect', () => {
+            console.log('user disconnected');
+            for (const roomId in rooms) {
+              const room = rooms[roomId];
+              if (room.players[socket.id]) {
+                delete room.players[socket.id];
+                io.to(roomId).emit('playerLeft');
+                if (Object.keys(room.players).length === 0) {
+                  delete rooms[roomId];
+                }
+                break;
+              }
+            }
+          });
+       
     })
     
 
