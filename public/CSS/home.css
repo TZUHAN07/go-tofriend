@@ -1,3 +1,11 @@
+.welcome{
+    margin:5px;
+    padding:5px;
+}
+.login-out{
+    margin:5px;
+    padding:5px;
+}
 .gameRoom{
     position: relative;
     display:flex;
@@ -20,4 +28,120 @@
     background-color: aliceblue;
     margin:50px 30px 30px 10px;
     border-radius: 30px;
+}
+.online{
+    margin:20px;
+    color:#855a09;
+    font-size: 18px;
+    font-weight: 700;
+}
+.name{
+    margin:10px 20px ;
+    color:#634308;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.askcontainer{
+    position: absolute;
+    left: 300px;
+    top: 300px;
+    width:360px;height:200px;
+    background: antiquewhite;
+    box-shadow:0px 0px 10px 0px #AABBCC;
+    border-radius: 5px;
+    padding:10px;
+}
+
+.ask{
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    margin:50px  20px 20px 20px;
+    padding:10px;
+    font-size: 20px;
+    font-weight: 700;
+    color:#a56f0a;
+   
+}
+.no{
+    display: flex;
+    justify-content: center;
+}
+.yes{
+    display: flex;
+    justify-content: center;
+}
+.answer{
+    width:50px;height:20px;
+    margin:10px 30px;
+    padding:10px;
+    font-size: 18px;
+    font-weight: 700;
+    background: #855a09;
+    color:#ffff;
+    border-radius: 5px;
+  
+}
+.answer:hover{
+    background: #a56f0a;
+}
+.ans{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;  
+}
+.invite{
+    position: absolute;
+    left: 900px;
+    top: 100px;
+    width:200px;height:100px;
+    background: antiquewhite;
+    box-shadow:0px 0px 10px 0px #AABBCC;
+    border-radius: 5px;
+    padding:10px;
+}
+.invite-ask{
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    margin:10px;
+    padding:5px;
+    font-size: 16px;
+    font-weight: 700;
+    color:#a56f0a;
+}
+.invite-answer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;  
+} 
+
+.invite-ans{
+    width:80px;height:20px;
+    margin:5px ;
+    padding:10px;
+    font-size: 14px;
+    font-weight: 700;
+    background: #855a09;
+    color:#ffff;
+    border-radius: 5px;
+}
+.ans{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;  
+}
+
+
+.hide{
+    display:none;
+}
+.show_block{
+    display: block;
+    margin: auto;
 }

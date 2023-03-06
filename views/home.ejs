@@ -16,14 +16,14 @@
             <img src= "/images/logo.png" />
             <div class="top-left" id="project"><b>go-tofriend</b></div>
             <div class="top-right">
-                <div class="welcome " id="welcome">歡迎{{name}}</div>
+                <div class="welcome " id="welcome"></div>
                 <div class="login-out " id="logout">離開大廳</div>
             </div>
         </div>
         <div class="top-line"></div>
     </nav>
     <div class="gameRoom">
-        <!-- <div class="country"></div> -->
+        <!-- <div class="cou>ntry"></div> -->
         <div class="main">
             <div class="room">
                 <div class="room"></div>
@@ -33,6 +33,27 @@
         </div>
         <div class="player">
             <div class="online">線上-</div>
+            <div class="askcontainer hide">
+                <div class="context">
+                    <div class="ask">問要一起下棋嗎</div>
+                    <div class ="ans">
+                        <span class="answer"><div class="no" id="no">拒絕</div></span>
+                        <span class="answer"><div class="yes" id="yes">OK</div></span>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class ="invite hide" >
+                <div class ="invite-ask">邀請這位玩家嗎？</div>
+                <div class ="invite-answer">
+                    <span class="invite-ans"><div class="no" id="invite-no">下次再說</div></span>
+                    <span class="invite-ans"><div class="yes" id="invite-yes">迫不急待</div></span>
+                </div>
+            </div>
+            <div class="players" id="players">
+                <!-- <div class="name">MARY</div>
+                <div class="name">TOM</div> -->
+            </div>
         </div>
     </div>
     <div class="footer" id="footer">
@@ -40,6 +61,6 @@
     </div>
 
     <script src="/socket.io/socket.io.js"></script>
-    <script  rel="stylesheet" type="module" src="/JS/home.js"></script>   
+    <script  async type="module" src="/JS/home.js"></script>   
 </body>
 </html>
