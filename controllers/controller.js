@@ -46,7 +46,7 @@ module.exports = class Member {
             // 若寫入成功則回傳
             res.status(200).json({
                 ok: true,
-                result: result 
+                message: result 
             });
             
         } catch (err) {
@@ -58,7 +58,7 @@ module.exports = class Member {
                 });
         }
     }
-    async postLogin(req, res) {
+    async putLogin(req, res) {
         try{
             const memberData = {
             email: req.body.email,
@@ -88,14 +88,14 @@ module.exports = class Member {
                 }, process.env.SECRET);
                 // 存儲 token 到 cookie
                 res.cookie('access_token', token, {
-                    maxAge: 60 * 60 * 24 * 7, // token有效期為七天
+                    maxAge: 60 * 60 * 24 * 14, // token有效期為七天
                     httpOnly: true
                 });
                 // res.setHeader('token', token);
 
                 res.status(200).json({
                     ok: true,
-                    result:  '歡迎 ' + rows[0].name + ' 的登入！',
+                    message:  '歡迎 ' + rows[0].name + ' 的登入！',
                 })
             }else {
                 res.status(400).json({

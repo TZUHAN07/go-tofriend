@@ -25,7 +25,7 @@ const secret = process.env.JWT_SECRET;
 //確認email有沒有重複
 async function emailExist(email){
   const [rows] =  await connectionPool.query('SELECT email FROM member WHERE email = ?', email);
-  console.log(rows,25)
+  // console.log(rows)
   const result = true
  
   // 如果有重複的email
@@ -40,7 +40,7 @@ async function register(memberData) {
   try{
     await emailExist(memberData.email);
     const resultData = await connectionPool.query('INSERT INTO member SET ?', memberData)
-    console.log(resultData,39) ;
+    // console.log(resultData) ;
     result = memberData;
   }catch(err){
     console.error(err);
@@ -68,7 +68,8 @@ async function login(memberData) {
 
 
 
-module.exports = {register , emailExist, login ,secret}
+
+module.exports = {register , emailExist, login  ,secret}
 
 
 
