@@ -21,7 +21,7 @@ const goplayer = username
 
 const socket = io.connect('/messages');
 //join room
-socket.emit('joinRoom',username);
+socket.emit('joinRoom',goplayer);
 //message to server
 socket.on("message", (message) => {
     console.log( message);
