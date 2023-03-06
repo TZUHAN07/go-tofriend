@@ -1,9 +1,29 @@
 const chatfrom = document.getElementById('chatfrom')
 const chatMessages = document.querySelector('.chat-messages') 
-const socket = io.connect();
 
+
+// 取得 Cookie 中的 username 值
+const cookies = document.cookie.split('; ');
+console.log(cookies)
+let username = null;
+
+cookies.forEach(cookie => {
+  const [key, value] = cookie.split('=');
+  console.log([key, value])
+  if (key === 'username') {
+    username = value;
+  }
+  console.log(username)
+});
+
+const goplayer = username
+
+
+const socket = io.connect('/messages');
+//join room
+socket.emit('joinRoom',username);
 //message to server
-socket.on("message", message => {
+socket.on("message", (message) => {
     console.log( message);
     outputMessage(message);
 
@@ -12,20 +32,17 @@ socket.on("message", message => {
 
 })
 
-// socket.on('connect',() => {
-//   console.log(socket.id)
-//   console.log('user connected!')
-// });
-
-
-
+socket.on('connect',() => {
+  console.log(socket.id)
+  console.log('user connected!')
+});
 
 //message sumbit
 chatfrom.addEventListener('submit' , (e)=>{
     e.preventDefault();
     // get message text
     const msg = e.target.elements.msg.value;
-    //enit message to server
+    //emit message to server
     socket.emit('chatMessage',msg)
 
     //clear input
