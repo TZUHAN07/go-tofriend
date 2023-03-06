@@ -6,6 +6,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
     <link rel="stylesheet" type="text/css" href="/CSS/gocanvas.css" />
+    <link rel="stylesheet" type="text/css" href="/CSS/example.css" />
+    <link rel="stylesheet" type="text/css" href="/CSS/chat.css" />
+
     <title>go-tofriend 開始對奕</title>
 </head>
 
@@ -25,8 +28,9 @@
     </div>
     <div class="maindata">
         <div class="board">
-            <canvas id="weiqi" class="weiqi" width="900" height="900"></canvas>
+            <!-- <canvas id="weiqi" class="weiqi" width="900" height="900"></canvas> -->
             <canvas id="goboard" class="goboard" width="900" height="900" ></canvas>
+            <!-- <canvas id="point" class="point" width="900" height="900" ></canvas> -->
         </div>
         <div class="allData">
             <div class="playerData">
@@ -43,19 +47,20 @@
             </div>
             <div class="chatfrom-container">
                 <div class="chat-messages">
-                    <div class="message">
-                    </div>
+                    
                 </div>
-                <form id="chatfrom">
-                    <input
-                        id="msg"
-                        type="text"
-                        placeholder="Enter Message"
-                        required
-                        autocomplete="off"
-                    />
-                    <button class="btn"><i class="fas"></i>send</button>
-                </form>
+                <div class="chat-form-container">
+                    <form id="chatfrom">
+                        <input
+                            id="msg"
+                            type="text"
+                            placeholder="Enter Message"
+                            required
+                            autocomplete="off"
+                        />
+                        <button class="btn"><i class="fas"></i>send</button>
+                    </form>
+                </div>
 
             </div>
         </div>

@@ -1,154 +1,3 @@
-// const socket = io.connect();
-const moveShowButton = document.getElementById('moveShow');
-
-//落子順序輔助
-let moveShow = false;
-function clickButton() {
-	moveShowButton.onclick = function() {
-		if (moveShow) {
-			moveShowButton.innerHTML='落子順序';
-			moveShow = false;
-		} else {
-			moveShowButton.innerHTML='取消順序';
-			moveShow = true;
-		}
-		showGo();
-	}
-}
-
-//畫棋盤  
-function createBoard(ctx){
-	
-    for (let i = 0; i < 19; i++) {
-        ctx.beginPath();
-        // 橫線
-        ctx.moveTo(45 + (i * 45), 45);
-        ctx.lineTo(45 + (i * 45), 855);
-        ctx.stroke();
-
-		ctx.moveTo(45, 45 + (i * 45));
-        ctx.lineTo(855, 45 + (i * 45));
-        ctx.stroke();
-    }   
-}
-
-//畫棋盤上九個點
-function ninePoints(ctx) {
-	let points = new Array(
-		[180,180],[450,180],[720,180],
-		[180,450],[450,450],[720,450],
-		[180,720],[450,720],[720,720]
-	);
-	
-	for (let i = 0; i < points.length; i++) {
-		//circle
-		ctx.beginPath();
-		ctx.arc(points[i][0],points[i][1],4.5,0,2*Math.PI,false);
-		ctx.fillStyle='black';
-		ctx.fill();
-	}
-}
-
-//下棋處理
-let moveCount = 0;
-//滑鼠點擊元素
-function mousedownHandler(e) {
-	//獲取鼠標點擊事件，确定鼠標點擊的具體位置
-	let x ,y ;
-	if (e.offsetX || e.offsetX == 0) {
-	x = e.offsetX; //最左邊
-	y = e.offsetY; //最上面
-	}
-   
-	//判斷鼠標點擊的位置是否在一個特定區域內
-	if (x < 45-20 || x > 900-45+20)
-		return;
-	if (y < 45-20 || y > 900-45+20)
-		return;
-	
-  	//將鼠標點擊的坐標轉換為可以在棋盤上使用的座標
-	let xIsFree = false;
-	let yIsFree = false;
-  	let xStatus;
-  	let yStatus;
-	for (let i = 1; i <= 19; i++) {
-		if (x > i*45-22.5 && x < i*45+22.5) {
-			x = i*45;
-			xIsFree = true;
-      		xStatus = i -1;
-		}
-		if (y > i*45-22.5 && y < i*45+22.5) {
-			y = i*45;
-			yIsFree = true;
-      		yStatus = i -1;
-		}
-	}
-	if (!xIsFree || !yIsFree)
-		return;
-
-
-	play(xStatus, yStatus, moveCount);
-	showGo();
-}
-
-//滑鼠經過元素
-function mousemoveHandler(e) {
-  	//獲取鼠標點擊事件，确定鼠標點擊的具體位置
-  	let x ,y ;
-  	if (e.offsetX || e.offsetX == 0) {
-  	  x = e.offsetX; //最左邊
-  	  y = e.offsetY; //最上面
-  	}
-   
-	//判斷鼠標點擊的位置是否在一個特定區域內
-	if (x < 45-10 || x > 900-45+10)
-		return;
-	if (y < 45-10 || y > 900-45+10)
-		return;
-	
-  //將鼠標點擊的坐標轉換為可以在棋盤上使用的座標
-	let xIsFree = false;
-	let yIsFree = false;
-	for (let i = 1; i <= 19; i++) {
-		if (x > i*45-22.5 && x < i*45+22.5) {
-			x = i*45;
-			xIsFree = true;
-		}
-		if (y > i*45-22.5 && y < i*45+22.5) {
-			y = i*45;
-			yIsFree = true;
-		}
-	}
-	if (!xIsFree || !yIsFree)
-		return;
-
-	const canvas = document.getElementById('goboard');
-	const ctx = canvas.getContext('2d');
-	// 畫布清空
-	ctx.clearRect(0,0,900,900);
-
-	// put a new Gray stone
-	ctx.beginPath();
-	ctx.arc(x,y,22.5,0,2*Math.PI,false);
-	ctx.fillStyle='gray';
-	ctx.fill();
-
-	ctx.beginPath();
-	ctx.arc(x,y,20,0,2*Math.PI,false);
-	if (moveCount % 2 == 0)
-		ctx.fillStyle='black';
-	else
-		ctx.fillStyle='white';
-	ctx.fill();
-}
-//滑鼠離開元素
-function mouseoutHandler(e) {
-	const canvas = document.getElementById('goboard');
-	const ctx = canvas.getContext('2d');
-	ctx.clearRect(0,0,900,900);
-}
-
-
 //落子邏輯
 //棋盤的落子，開始為0
 let go = new Array(
@@ -196,7 +45,7 @@ let shadow = new Array(
 );
 
 let jie = new Array();
-let moveRecord = new Array();
+let moveRecord = new Array();å
 
 function showGo() {
 	const weiqi = document.getElementById('weiqi');
@@ -717,8 +566,8 @@ function ourGo(row, col) {
 
 	return false;
 }
-
-
+//下棋處理
+let moveCount = 0;
 // 真正落子
 function goDown(row, col) {
 	if (moveCount % 2 === 0) { //未落子前是白
@@ -729,48 +578,3 @@ function goDown(row, col) {
 	moveCount ++;
 	moveRecord.push([row, col, moveCount]);	// 記錄順序
 }
-
-//初始棋盤
-function initBroad() {
-	const canvas = document.getElementById('goboard');
-	canvas.addEventListener('mousedown', mousedownHandler, false);
-	canvas.addEventListener('mousemove', mousemoveHandler, false);
-	canvas.addEventListener('mouseout', mouseoutHandler, false);
-
-	const weiqi = document.getElementById('weiqi');
-	const ctx = weiqi.getContext('2d');
-	ctx.fillStyle = 'black';
-	// ctx.fillRect(0,0,900,900);
-
-	createBoard(ctx);
-	ninePoints(ctx);
-
-	showGo();
-	
-}
-
-//監聽
-function addLoadEvent(func) {
-	var oldonload = window.onload;
-	if (typeof window.onload != 'function') {
-		window.onload = func;
-	} else {
-		window.onload = function() {
-			oldonload();
-			func();
-		}
-	}
-}
-addLoadEvent(initBroad);
-addLoadEvent(clickButton);
-
-
-// module.exports = {
-// 	addLoadEvent,
-// 	showGo, 
-// 	play, 
-// 	mousedownHandler, 
-// 	mousemoveHandler, 
-// 	mouseoutHandler
-// }
-

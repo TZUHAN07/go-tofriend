@@ -1,151 +1,76 @@
-const boardsize = 19; // 圍棋棋盤大小
-const empty = 0; // 空格
-const black = 1; // 黑子
-const white = 2; // 白子
-const stoneType = {
-  [empty]: 'empty',
-  [black]: 'black',
-  [white]: 'white'
-};
+const { createCanvas } = require('canvas');
 
-let board = null; // 圍棋棋盤
-let turn = black; // 黑子先下
+function createBoard() {
+  const canvas = createCanvas(900, 900);
+  const ctx = canvas.getContext('2d');
 
-// 初始化棋盤
-function initBoard() {
-    board = [];
-    for (let i = 0; i < boardsize; i++) {
-      board.push([]);
-      for (let j = 0; j < boardsize; j++) {
-        board[i].push(empty);
-      }
-    }
-}
-// 判斷棋子是否在棋盤內
-function isOnBoard(x, y) {
-    return x >= 0 && x < boardsize && y >= 0 && y < boardsize;
-}
-// 判斷棋子是否為空格
-function isEmpty(x, y) {
-    return board[x][y] === empty;
-}
-// 檢查棋子是否能落在指定位置
-function isValidMove(x, y, color) {
-    if (!isOnBoard(x, y) || !isEmpty(x, y)) {
-      return false;
-    }
-    // 先假設棋子可以落在指定位置
-    let hasLiberty = false; // 有氣的旗子
-    board[x][y] = color;
+  // 畫棋盤的網格線
+  for (let i = 0; i < 19; i++) {
+    ctx.beginPath();
+    ctx.moveTo(45 + (i * 45), 45);
+    ctx.lineTo(45 + (i * 45), 855);
+    ctx.stroke();
 
-    // 檢查棋子四周的位置
-    for (let i = -1; i <= 1; i++) {
-      for (let j = -1; j <= 1; j++) {
-        if (i === 0 && j === 0) {
-          continue;
-        }
-
-        const nx = x + i;
-        const ny = y + j;
-
-        if (isOnBoard(nx, ny) && board[nx][ny] !== empty) {
-          const stoneColor = board[nx][ny];
-          const liberties = getLiberties(nx, ny);
-
-          if (stoneColor !== color && liberties === 0) {
-            // 擊殺對方旗子
-            removeStones(nx, ny);
-          } else if (stoneColor === color || liberties > 0) {
-            hasLiberty = true;
-          }
-        } else {
-          hasLiberty = true;
-        }
-      }
-    }
-    if (!hasLiberty) {
-        board[x][y] = empty; // 棋子沒有氣，不能落在指定位置
-        return false;
-    }
-    return true;
-}
-// 取得旗子的氣數
-function getLiberties(x, y) {
-    const stoneColor = board[x][y];
-    let liberties = 0;
-  
-    // 檢查棋子四周的位置
-    for (let i = -1; i <= 1; i++) {
-      for (let j = -1; j <= 1; j++) {
-        if (i === 0 && j === 0) {
-          continue;
-        }
-  
-        const nx = x + i;
-        const ny = y + j;
-  
-        if (!isOnBoard(nx, ny)) {
-          continue;
-        }
-  
-        if (board[nx][ny] === empty) {
-          liberties++;
-        } else if (board[nx][ny] === stoneColor) {
-          liberties += getLiberties(nx, ny);
-        }
-      }
-    }
-    return liberties;
-}
-// 擊殺指定位置的旗子
-function removeStones(x, y) {
-  const stoneColor = board[x][y];
-
-  board[x][y] = empty;
-
-  // 檢查棋子四周的位置
-  for (let i = -1; i <= 1; i++) {
-    for (let j = -1; j <= 1; j++) {
-      if (i === 0 && j === 0) {
-        continue;
-      }
-
-      const nx = x + i;
-      const ny = y + j;
-
-      if (!isOnBoard(nx, ny)) {
-        continue;
-      }
-      
-      if (board[nx][ny] === stoneColor) {
-        removeStones(nx, ny);
-      }
-    }
-  }
-}
-// 判斷勝負
-function getWinner() {
-    let blackStones = 0;
-    let whiteStones = 0;
-  
-    for (let i = 0; i < boardsize; i++) {
-      for (let j = 0; j < boardsize; j++) {
-        if (board[i][j] === black) {
-          blackStones++;
-        } else if (board[i][j] === white) {
-          whiteStones++;
-        }
-      }
-    }
-  
-    if (blackStones > whiteStones) {
-      return black;
-    } else if (whiteStones > blackStones) {
-      return white;
-    } else {
-      return empty;
-    }
+    ctx.beginPath();
+    ctx.moveTo(45, 45 + (i * 45));
+    ctx.lineTo(855, 45 + (i * 45));
+    ctx.stroke();
   }
 
-// 初始化棋盤
-initBoard();
+  // 畫棋盤上的九個點
+  const points = [    [180, 180], [450, 180], [720, 180],
+    [180, 450], [450, 450], [720, 450],
+    [180, 720], [450, 720], [720, 720]
+  ];
+  ctx.fillStyle = '#000';
+  points.forEach((point) => {
+    ctx.beginPath();
+    ctx.arc(point[0], point[1], 4.5, 0, 2 * Math.PI);
+    ctx.fill();
+  });
+
+  return canvas.toDataURL();
+}
+
+
+// const boardSize = 19; // 棋盤大小
+// const board = []; // 棋盤陣列
+
+// // 初始化棋盤
+// for (let i = 0; i < boardSize; i++) {
+//   board[i] = [];
+//   for (let j = 0; j < boardSize; j++) {
+//     board[i][j] = 0; // 0 表示空位
+//   }
+// }
+// 在全局作用域中声明 board 变量
+const board = [];
+const boardSize = 19;
+// 初始化 board 变量
+for (let i = 0; i < boardSize; i++) {
+  board.push(new Array(boardSize).fill(0));
+}
+console.log(board)
+
+// 當收到前端的落子位置時，更新棋盤
+function updateBoard(x, y, player) {
+  board[x][y] = player; // 將玩家的旗子放置在棋盤上
+  console.log(board[x][y]),50
+  return board;
+}
+
+// 將棋盤轉成字串形式，以便傳給前端顯示
+function getBoardString() {
+  let boardString = '';
+  for (let i = 0; i < boardSize; i++) {
+    for (let j = 0; j < boardSize; j++) {
+      boardString += board[i][j];
+    }
+    boardString += '\n';
+  }
+  return boardString;
+}
+
+
+
+module.exports = {createBoard,updateBoard,getBoardString}

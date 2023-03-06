@@ -8,7 +8,7 @@ router.use(bodyParser.urlencoded({ extended: true })); // 解析 application/x-w
 const MemberModifyMethod = require('../controllers/controller');
 memberModifyMethod = new MemberModifyMethod();
 router.post('/user',memberModifyMethod.postRegister);
-router.put('/user/auth', memberModifyMethod.postLogin);
+router.put('/user/auth', memberModifyMethod.putLogin);
 router.get('/user/auth', memberModifyMethod.getLogin);
 router.delete('/user/auth', memberModifyMethod.deleteLogout);
 
