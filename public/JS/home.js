@@ -40,17 +40,19 @@ function updateOnlineUsers(users) {
                 });  
                 inviteyes.addEventListener("click", function () {
                     document.querySelector(".invite").classList.remove("show_block");
+                    location.href='/gogame'
                 });  
                 
                 // 監聽後端回傳的結果
                 socket.on("responseToInvitation", function(data) {
 
                     if (data.accept) {
-                        // 玩家同意進入房間
-                        document.querySelector(".invite").classList.remove("show_block");
+                        // 玩家要邀請進入房間
+                        document.querySelector(".askcontainer").classList.remove("show_block");
+
                     } else {
-                        // 玩家不同意進入房間
-                        document.querySelector(".invite").classList.remove("show_block");
+                        // 玩家不要邀請進入房間
+                        document.querySelector(".askcontainer").classList.remove("show_block");
                     }
                 });
                 // let playerName = this.textContent;
