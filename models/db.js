@@ -40,7 +40,7 @@ async function register(memberData) {
   try{
     await emailExist(memberData.email);
     const resultData = await connectionPool.query('INSERT INTO member SET ?', memberData)
-    // console.log(resultData) ;
+    console.log(resultData) ;
     result = memberData;
   }catch(err){
     console.error(err);

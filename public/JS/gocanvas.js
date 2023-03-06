@@ -1,9 +1,30 @@
-// const socket = io.connect();// 創建 Socket.io 連線
-const socket = io.connect('/go');
+// 點擊離開大廳網頁會導回首頁
+logout.addEventListener("click", function () {
+    fetch(`/user/auth`, {method: 'DELETE'})
+    .then(function (response){
+        return response.json();
+    })
+    .then(function (data){
+        if(data["ok"]){
+            location.href='/home'
+        }
+    })
+    .catch(function (err){
+    console.log("錯誤訊息",err)
+    })
+})
 
+const socket = io.connect('/go');
+// 連接成功時執行
 socket.on('connect',() => {
 	console.log(socket.id)
 })
+
+// 加入房間成功時執行
+socket.on('joinedRoom', (color) => {
+	console.log(`Joined room as ${color}`);
+  });
+  
 socket.on('updatePlayers', (onlinePlayers) => {
 	console.log(onlinePlayers);
     // 处理在线玩家更新
@@ -195,5 +216,4 @@ canvas.addEventListener('mouseout', (e) => {
 	const ctx = canvas.getContext('2d');
 	ctx.clearRect(0,0,900,900);
 })
-
 

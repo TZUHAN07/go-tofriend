@@ -38,8 +38,8 @@ app.get('/gogame',(req, res)=>{
     res.render('gogame')
 });
 //棋室
-app.get('/goonly',(req, res)=>{
-    res.render('goonly')
+app.get('/oneplayer',(req, res)=>{
+    res.render('oneplayer')
 });
 
 const messagesNamespace = io.of('/messages');
