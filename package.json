@@ -4,7 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start-server": "npm start",
+    "test": "start-server-and-test start http://localhost:3000 test",
     "devStart": "nodemon server.js"
   },
   "author": "",
@@ -33,5 +34,8 @@
   "optionalDependencies": {
     "bufferutil": "^4.0.7",
     "utf-8-validate": "^5.0.10"
+  },
+  "devDependencies": {
+    "start-server-and-test": "^2.0.0"
   }
 }
