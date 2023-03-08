@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
     <link rel="stylesheet" type="text/css" href="/CSS/index.css" />
+    <link rel="shortcut icon" href="/images/go.png">
     <title>go-friend</title>
 </head>
 
@@ -24,15 +25,19 @@
                     <div class="top-bar"></div>
                     <div class="verify_title">登入會員帳號</div>
                     <div class="email">
+                        <form>
                         <label for="login_email">信箱：</label>
-                        <input type="text" name="email" id="login_email" class="login_email  verify_input"
-                            placeholder="輸入電子信箱" />
-                    </div>
+                            <input type="text" name="email" id="login_email" class="login_email  verify_input"
+                                placeholder="輸入電子信箱" />
+                        </form>
+                        </div>
                     <br />
                     <div class="password">
-                        <label for="login_password">密碼：</label>
-                        <input type="password" name="password" id="login_password" class="login_password verify_input"
-                            placeholder="輸入密碼" />
+                        <form>
+                            <label for="login_password">密碼：</label>
+                            <input type="password" name="password" id="login_password" class="login_password verify_input"
+                                    placeholder="輸入密碼" autocomplete="new-password"/>
+                        </form> 
                     </div>
                     <br />
                     <div type="button" class="verify_btn verify_input" id="login_button">登入帳戶</div>
@@ -47,21 +52,27 @@
                     <div class="top-bar"></div>
                     <div class="verify_title">註冊會員帳號</div>
                     <div class="name">
-                        <label for="register_name">名稱：</label>
-                        <input type="text" name="name" id="register_name" class="register_name  verify_input"
-                            placeholder="輸入姓名" />
+                        <form>
+                            <label for="register_name">名稱：</label>
+                            <input type="text" name="name" id="register_name" class="register_name  verify_input"
+                                placeholder="輸入姓名" />
+                        </form>
                     </div>
                     <br />
                     <div class="email">
-                        <label for="register_email">信箱：</label>
-                        <input type="text" name="email" id="register_email" class="register_email verify_input"
-                            placeholder="輸入電子信箱" />
+                        <form>
+                            <label for="register_email">信箱：</label>
+                            <input type="text" name="email" id="register_email" class="register_email verify_input"
+                                placeholder="輸入電子信箱" />
+                        </form>
                     </div>
                     <br />
                     <div class="password">
-                        <label for="register_password">密碼：</label>
-                        <input type="password" name="password" id="register_password" class="register_password verify_input"
-                            placeholder="輸入密碼" />
+                        <form>
+                            <label for="register_password">密碼：</label>
+                            <input type="password" name="password" id="register_password" class="register_password verify_input"
+                                placeholder="輸入密碼" autocomplete="new-password"/>
+                        </form>
                     </div>
                     <br />
                     <div type="button" class="verify_btn verify_input" id="register_button">註冊新帳戶</div>
